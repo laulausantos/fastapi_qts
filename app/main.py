@@ -1,28 +1,28 @@
 from fastapi import FastAPI
 
-app  = FastAPI()
+app = FastAPI()
 
 @app.get("/")
 def raiz():
-    return { "mensagem" : "API FatsAPI Funcionando." }
+    return {"mensagem" : "API FastAPI Funcionando."}
 
 @app.get("/health")
 def health():
-    return{ "status": "ok" }
+    return {"status" : "ok"}
 
-@app.get("soma")
-def soma (a: int, b: int):
-    return {"resultado": a + b}
+@app.get("/soma")
+def soma(a: int, b: int):
+    return { "resultado" : a + b}
 
 from pydantic import BaseModel
 
 class Tarefa(BaseModel):
     titulo: str
-    concluido: bool = False
+    concluida: bool = False
 
-@app.post("/tarefa")
+@app.post("/tarefas")
 def criar_tarefa(tarefa : Tarefa):
-    return {
-        "mensagem": "Tarefa recebida com sucesso",
+    return{
+        "mensagem" : "tarefa recebida com sucesso",
         "dados" : tarefa
     }
